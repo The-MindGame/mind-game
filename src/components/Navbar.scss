@@ -1,0 +1,72 @@
+.navLink.currentPage{
+    background-color: #186053;
+    box-shadow: 0px 15px 40px rgba(24, 96, 83, 0.61);
+}
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+    padding: 0 2rem;
+    background-color: black;
+    color: white;
+    nav{
+        a{
+            background-color: transparent;
+            margin: 0 1rem;
+            padding: 0.5rem 2rem ;
+            border: 1px transparent;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            color: white;
+            transition: 0.2s all;
+            font-weight: 800;
+        }
+
+        a:active, a:visited{
+            text-decoration: none;
+            color: white;
+        }
+        a:hover{
+            background-color: rgba(24, 96, 83, 0.5);
+            box-shadow: 0px 10px 25px rgba(24, 96, 83, 0.61);
+        }
+    }
+    .navButton{
+        padding: 5px;
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        outline: none;
+        color: white;
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+
+@media only screen and (max-width: 768px){
+    header{
+        .navButton{
+            visibility: visible;
+            opacity: 1;
+        }
+        nav{
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 1.5rem;
+            background-color: black;
+            transition: 0.3s;
+            transform: translateY(-100vh);
+        }
+        .responsiveNav{
+            transform: none;
+        }
+    }
+}
