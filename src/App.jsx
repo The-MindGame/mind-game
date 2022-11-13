@@ -1,32 +1,58 @@
-import React, { useLayoutEffect } from "react";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+import Home from "./pages/HomePage";
+import ProtectedRoute from "./routes/ProtectedRoute";
+import ProtectedLogin from "./routes/ProtectedLogin";
+import StartGamePage from "./pages/StartGamePage";
+import AboutPage from "./pages/AboutPage"
+import Rules from "./pages/rules/Rules"
+import Navbar from "./components/Navbar.jsx"
+
+import { useContext, useEffect } from "react";
+import { authContext } from "./components/Authentication";
+import Cookies from "js-cookie";
+
 import "./App.scss";
-import Home from "../src/pages/home/Home";
-import About from "../src/pages/about/About";
-import Rules from "../src/pages/rules/Rules";
 
-const Wrapper = ({ children }) => {
+
+
+function App() {
+
+  const { authentication, setAuthentication } = useContext(authContext);
+
+  useEffect(() => {
+    const auth = Cookies.get("user");
+    if (auth) {
+      setAuthentication(auth);
+    }
+  }, [authentication]);
+
+
   const location = useLocation();
-  useLayoutEffect(() => {
-    document.documentElement.scrollTo(0, 0);
-  }, [location.pathname]);
-  return children;
-};
+  const current = location.pathname.split("/").filter((x) => x);
 
-const App = () => {
+
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Wrapper>
-          <Routes>
-            <Route path="/" exact element={<Home />} />
-            <Route path="/rules" exact element={<Rules />} />
-            <Route path="/about" exact element={<About />} />
-          </Routes>
-        </Wrapper>
-      </BrowserRouter>
+    <div className="App">     
+        {current[current.length-1] === 'start' ? <></> : <Navbar/>}
+
+        <Routes>
+          <Route index element={<Home />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/rules" element={<Rules />} />
+          <Route element={<ProtectedLogin />}>
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/signup" element={<SignupPage />} />
+          </Route>
+
+          <Route element={<ProtectedRoute />}>
+            <Route path="/start" element={<StartGamePage />} />
+          </Route>
+        </Routes>
     </div>
   );
-};
+}
 
 export default App;
