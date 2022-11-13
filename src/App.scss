@@ -1,1 +1,8 @@
-@import './styles/Auth.scss';
+@import "./styles/Auth.scss";
+
+.App {
+  background: url("/src/assets/images/background_bunny.png") no-repeat fixed;
+  background-size: contain;
+  background-color: #1d1427;
+  min-height: 100vh;
+}

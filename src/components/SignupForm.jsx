@@ -2,12 +2,9 @@ import React from "react";
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import GoogleIcon from "../assets/icons/googleicon.svg"
-
-
+import GoogleIcon from "../assets/icons/googleicon.svg";
 
 function SignupForm() {
-
   const navigate = useNavigate();
 
   // Setting states
@@ -32,7 +29,6 @@ function SignupForm() {
     setErrorMessage("");
   }, [name, email, password, passwordMatch]);
 
-
   const handleSubmit = async (e) => {
     // to prevent refresh
     e.preventDefault();
@@ -48,7 +44,6 @@ function SignupForm() {
       setSuccess(true);
       setPassword("");
       navigate("/login");
-
     } catch (err) {
       if (!err?.response) {
         setErrorMessage("No Server Response");
@@ -58,85 +53,73 @@ function SignupForm() {
     }
   };
 
-
-
   return (
-    
-      <div className="auth-form-wrapper">
+    <div className="auth-form-wrapper">
+      <div className="auth-row">
+        <p className="auth-heading">Create new Account</p>
+        <p className="auth-subheading">
+          See what is going on with your business
+        </p>
+      </div>
+
+      <div className="auth-row-outlined">
+        <Link to="/signup">
+          <img src={GoogleIcon} />
+          <span>Continue with Google</span>
+        </Link>
+      </div>
+
+      <div className="auth-row-sm">
+        <p>or Sign Up with e-mail</p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="auth-form">
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+          placeholder="luntik"
+          id="username"
+          name="username"
+          required
+        />
+
+        <label htmlFor="email">E-Mail</label>
+        <input
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          placeholder="mail@abc.com"
+          id="email"
+          name="email"
+          required
+        />
+
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          placeholder="*****************"
+          id="password"
+          name="password"
+          required
+        />
+
+        <label htmlFor="confirm-password">Confirm Password</label>
+        <input
+          type="password"
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          value={confirmPassword}
+          placeholder="*****************"
+          id="confirm-password"
+          name="confirm-password"
+          required
+        />
+
         <div className="auth-row">
-          <p className="auth-heading">Create new Account</p>
-          <p className="auth-subheading">
-            See what is going on with your business
-          </p>
-        </div>
-
-        <div className="auth-row-outlined">
-          <Link to="/signup">
-            <img src={GoogleIcon} />
-            <span>Continue with Google</span>
-          </Link>
-        </div>
-
-        <div className="auth-row-sm">
-          <p>or Sign Up with e-mail</p>
-        </div>
-
-        <form onSubmit={handleSubmit} className="auth-form">
-          <label htmlFor="username">
-              Username
-          </label>
-          <input
-            type="text"
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            placeholder="cr7"
-            id="username"
-            name="username"
-            required
-          />
-
-          <label htmlFor="email">
-            E-Mail
-          </label>
-          <input
-            type="email"
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            placeholder="mail@abc.com"
-            id="email"
-            name="email"
-            required
-          />
-
-          <label htmlFor="password">
-              Password
-          </label>
-          <input
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            placeholder="*****************"
-            id="password"
-            name="password"
-            required
-          />
-
-          <label htmlFor="confirm-password">
-             Confirm Password
-          </label>
-          <input
-            type="password"
-            onChange={(e) => setConfirmPassword(e.target.value)}
-            value={confirmPassword}
-            placeholder="*****************"
-            id="confirm-password"
-            name="confirm-password"
-            required
-          />
-
-          <div className="auth-row">
-            
-            {/* <p
+          {/* <p
               ref={errorRef}
               className={passwordMatch ? "noDisplay" : "errorMessage"}
             >
@@ -148,16 +131,22 @@ function SignupForm() {
             >
               {errorMessage}
             </p> */}
-          </div>
-
-          <button type="submit" className="button-signup">Create Account</button>
-        </form>
-
-        <div className="auth-row">
-          <span>Already have an account?</span>
-          <span><Link to="/login" className="link-to-login">Sign In</Link></span>
         </div>
+
+        <button type="submit" className="button-signup">
+          Create Account
+        </button>
+      </form>
+
+      <div className="auth-row">
+        <span>Already have an account?</span>
+        <span>
+          <Link to="/login" className="link-to-login">
+            Sign In
+          </Link>
+        </span>
       </div>
+    </div>
   );
 }
 
