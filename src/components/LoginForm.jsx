@@ -14,7 +14,7 @@ function LoginForm() {
   
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const [success, setSuccess] = useState(false);
 
   
@@ -32,12 +32,12 @@ function LoginForm() {
         Cookies.set("user", JSON.stringify({email, token}), { expires: 3, path: '' });
         setSuccess(true);     
   
-      } catch (error) {
+      } catch (err) {
   
-        if (error.response?.statusCode === 404) {
-          setError("Missing E-mail or Password");
+        if (err.response?.statusCode === 404) {
+          setErrorMessage("Missing E-mail or Password");
         } else {
-          setError("Login Failed");
+          setErrorMessage("Login Failed");
         }
       }
     };
@@ -93,18 +93,12 @@ function LoginForm() {
         />
 
         <div className="auth-row">
-          {/* <p
-            ref={errorRef}
-            className={passwordMatch ? "noDisplay" : "errorMessage"}
-          >
-            Passwords don't match
-          </p>
           <p
             ref={errorRef}
             className={errorMessage ? "errorMessage" : "noDisplay"}
           >
             {errorMessage}
-          </p> */}
+          </p>
         </div>
 
         <button type="submit" className='button-login'>Log In</button>

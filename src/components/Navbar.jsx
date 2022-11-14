@@ -35,7 +35,7 @@ const Navbar = () => {
   const changeWidth = function (index) {
     const focusedElement = headerMenus.current;
 
-    let distance = 45;
+    let distance = 50;
     for (let i = 0; i < index; i++) {
       distance += focusedElement[i].offsetWidth + 24;
     }

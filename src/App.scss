@@ -1,6 +1,8 @@
 @import "./styles/Auth.scss";
 
 .App {
+  display: flex;
+  flex-direction: column;
   background: url("/src/assets/images/background_bunny.png") no-repeat fixed;
   background-size: contain;
   background-color: #1d1427;

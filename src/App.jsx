@@ -37,7 +37,6 @@ function App() {
   return (
     <div className="App">
       {current[current.length - 1] === "start" ? <></> : <Navbar />}
-
       <Routes>
         <Route index element={<Home />} />
         <Route path="/about" element={<AboutPage />} />

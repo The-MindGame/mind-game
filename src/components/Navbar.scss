@@ -5,32 +5,32 @@
 
 header {
   display: flex;
+  padding-top: 3rem;
+  margin: 0 4rem;
   align-items: center;
   justify-content: space-between;
-  height: 80px;
-  padding: 0 2rem;
   color: white;
+
   nav {
     a {
       margin: 0 12px;
-      padding: 10px 25px;
-      border-radius: 9px;
+      padding: 1rem 2.5rem;
       color: white;
       transition: 0.5s all;
       font-weight: 800;
       z-index: 1;
+      font-size: 1.8rem;
     }
     .navbar-wrapper {
       display: flex;
       .absolute {
+        border-radius: 9px;
         transition: width 0.5s ease-in-out, left 0.5s ease-in-out;
         position: absolute;
         width: 82px;
-        height: 42px;
+        height: 44px;
         background-color: #186053;
-        border-radius: 9px;
         z-index: 0;
-        border-radius: 4px;
         left: 0;
         box-shadow: 0px 10px 25px rgba(24, 96, 83, 0.61);
       }
@@ -43,7 +43,7 @@ header {
     border: none;
     outline: none;
     color: white;
-    visibility: hidden;
+    display: none;
     opacity: 0;
   }
 }
@@ -52,6 +52,7 @@ header {
   header {
     .navButton {
       visibility: visible;
+      display: block;
       opacity: 1;
     }
     nav {
@@ -64,7 +65,7 @@ header {
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      gap: 1.5rem;
+      gap: 2.4rem;
       background-color: black;
       transition: 0.3s;
       transform: translateY(-100vh);
