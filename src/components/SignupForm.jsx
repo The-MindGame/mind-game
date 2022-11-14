@@ -16,6 +16,8 @@ function SignupForm() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [name, setName] = useState("");
 
+  const errorRef = useRef();
+
   const [errorMessage, setErrorMessage] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(true);
   const [success, setSuccess] = useState(false);
@@ -136,7 +138,7 @@ function SignupForm() {
 
           <div className="auth-row">
             
-            {/* <p
+            <p
               ref={errorRef}
               className={passwordMatch ? "noDisplay" : "errorMessage"}
             >
@@ -147,7 +149,7 @@ function SignupForm() {
               className={errorMessage ? "errorMessage" : "noDisplay"}
             >
               {errorMessage}
-            </p> */}
+            </p>
           </div>
 
           <button type="submit" className="button-signup">Create Account</button>

@@ -9,6 +9,7 @@ $pinkShadow : rgba(215, 79, 113, 0.82);
 $violet :#432C7A;
 $violetShadow: #503396;
 $darkBlue :#1D1427;
+$errorRed:#d32f2f;
 
 
 @font-face {
@@ -188,6 +189,17 @@ a{
     .button-login{
         @include formButton($violet, $violetShadow);
     }
+
+    .noDisplay{
+        display: none;
+      }
+      
+      .errorMessage{
+        display:block;
+        @include formText(1rem, 700, $errorRed);
+        margin-bottom:0.5rem;
+      }
+      
 
 }
 
