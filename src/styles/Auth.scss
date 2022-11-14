@@ -10,7 +10,6 @@ $darkBlue: #1d1427;
 $errorRed: #d32f2f;
 
 @mixin formText($fontSize, $fontWeight, $color) {
-  font-family: $fontText;
   font-weight: $fontWeight;
   font-size: $fontSize;
   color: $color;
@@ -130,7 +129,7 @@ a {
   justify-content: center;
 
   label {
-    @include formText(1.4rem, 600, $grayText);
+    @include formText(1.4rem, 600, #ffffff);
   }
 
   input {

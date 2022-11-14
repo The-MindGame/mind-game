@@ -140,14 +140,10 @@ function SignupForm() {
         </button>
       </form>
 
-      <div className="auth-row">
+      <Link to="/login" className="auth-row">
         <span>Already have an account?</span>
-        <span>
-          <Link to="/login" className="link-to-login">
-            Sign In
-          </Link>
-        </span>
-      </div>
+        <span className="link-to-login">Sign In</span>
+      </Link>
     </div>
   );
 }
