@@ -18,6 +18,7 @@ function SignupForm() {
   const [errorMessage, setErrorMessage] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(true);
   const [success, setSuccess] = useState(false);
+  const [invalidAttempt, setInvalidAttempt] = useState(false);
 
   // checking whether passwords entered in both fields are corresponding to each other
   useEffect(() => {
@@ -36,16 +37,23 @@ function SignupForm() {
     e.preventDefault();
 
     try {
-      const response = await axios.post(
-        `https://backmind-production.up.railway.app/auth/registration`,
-        JSON.stringify({ email, password, name }),
-        {
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      setSuccess(true);
-      setPassword("");
-      navigate("/login");
+
+      if(passwordMatch){
+        setInvalidAttempt(false);
+        const response = await axios.post(
+          `https://backmind-production.up.railway.app/auth/registration`,
+          JSON.stringify({ email, password, name }),
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        );
+        setSuccess(true);
+        setPassword("");
+        navigate("/login");
+      }
+      else{
+        setInvalidAttempt(true);
+      }
     } catch (err) {
       if (!err?.response) {
         setErrorMessage("No Server Response");
@@ -123,13 +131,13 @@ function SignupForm() {
         <div className="auth-row">
           <p
             ref={errorRef}
-            className={passwordMatch ? "noDisplay" : "errorMessage"}
+            className={`${passwordMatch ? "noDisplay" : "errorMessage"} ${invalidAttempt ? "highlight" : ""}`}
           >
             Passwords don't match
           </p>
           <p
             ref={errorRef}
-            className={errorMessage ? "errorMessage" : "noDisplay"}
+            className={`${errorMessage ? "errorMessage" : "noDisplay"} ${invalidAttempt ? "highlight" : ""}`}
           >
             {errorMessage}
           </p>

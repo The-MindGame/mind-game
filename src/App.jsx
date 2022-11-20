@@ -14,32 +14,40 @@ import StartGamePage from "./pages/StartGamePage";
 import AboutPage from "./pages/AboutPage";
 import Rules from "./pages/Rules";
 import Navbar from "./components/Navbar.jsx";
+import LoadingPage from "./pages/LoadingPage"
 
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { authContext } from "./components/Authentication";
 import Cookies from "js-cookie";
 
 import "./App.scss";
 
 function App() {
+
   const { authentication, setAuthentication } = useContext(authContext);
+  const [loading, setLoading] = useState(true);
+
 
   useEffect(() => {
+    setLoading(false);
     const auth = Cookies.get("user");
     if (auth) {
       setAuthentication(auth);
     }
   }, [authentication]);
 
+
   const location = useLocation();
   const current = location.pathname.split("/").filter((x) => x);
 
+
   return (
+  
     <div className="App">
-      {current[current.length - 1] === "start" ? <></> : <Navbar />}
+      {loading ? (<LoadingPage/>) : <div>{current[current.length - 1] === "start" ? <></> : <Navbar />}
       <Routes>
         <Route index element={<Home />} />
-        <Route path="/about" element={<AboutPage />} />
+        <Route path="/about-us" element={<AboutPage />} />
         <Route path="/rules" element={<Rules />} />
         <Route element={<ProtectedLogin />}>
           <Route path="/login" element={<LoginPage />} />
@@ -49,7 +57,8 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/start" element={<StartGamePage />} />
         </Route>
-      </Routes>
+      </Routes></div> }
+    
     </div>
   );
 }
