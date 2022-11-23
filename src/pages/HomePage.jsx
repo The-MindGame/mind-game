@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { authContext } from "../components/Authentication";
+import { NavLink } from "react-router-dom";
+import "../../src/styles/Home.scss";
+import videoBg from "../assets/video/themind.mp4";
 
 function HomePage() {
   return (
-    <div>
-      Home
-      <Link to="/start">game</Link>
+    <div className="home" style={{position: "relative"}}>
+      <video src={videoBg} autoPlay loop muted />
+      <div className="homepageElements">
+        <h1 className="homepageTitle">The Mind Game</h1>
+        <p className="gameMotto">Unite mind with your friends...</p>
+        <div className="homepageButtons">
+          <NavLink exact to="/login" id="loginButton" className="button">
+            Login
+          </NavLink>
+          <NavLink exact to="/signup" id="signupButton" className="button">
+            Sign up
+          </NavLink>
+        </div>
+      </div>
     </div>
   );
 }
