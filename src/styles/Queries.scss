@@ -1,0 +1,21 @@
+
+
+
+@media screen and (max-width:1024px){
+    // ABOUT US
+    .no-back-page-wrapper{
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .bio{
+        margin-top: 0;
+    }
+}
+
+
+@media screen and (max-width:600px){
+    .no-back-page-wrapper{
+        padding: 7rem 4rem;
+    }
+}

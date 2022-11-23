@@ -1,207 +1,205 @@
-
-
 $grayText: #828282;
-$fontText : 'Nunito Sans';
-$rowBorder: #E8E8E8;
-$inputBorder: #DED2D9;
-$pink: #D74F71;
-$pinkShadow : rgba(215, 79, 113, 0.82);
-$violet :#432C7A; 
+$fontText: "Nunito Sans";
+$rowBorder: #e8e8e8;
+$inputBorder: #ded2d9;
+$pink: #d74f71;
+$pinkShadow: rgba(215, 79, 113, 0.82);
+$violet: #432c7a;
 $violetShadow: #503396;
-$darkBlue :#1D1427;
-
-
-@font-face {
-    font-family: "Mr Tiger";
-    src: url("/src/assets/mr-tiger-regular.woff2.ttf");
-}
-
-@font-face {
-    font-family: "Nunito Sans";
-    src: url("/src/assets/NunitoSans-Regular.ttf");
-}
+$darkBlue: #1d1427;
+$errorRed: #d32f2f;
 
 
 @mixin formText($fontSize, $fontWeight, $color) {
-    font-family: $fontText;
-    font-weight: $fontWeight;
-    font-size: $fontSize;
-    color:$color;
+  font-weight: $fontWeight;
+  font-size: $fontSize;
+  color: $color;
 }
 
 @mixin border($color) {
-    border:1px solid $color;
-    border-radius: 5px;
+  border: 1px solid $color;
+  border-radius: 5px;
+}
+
+@mixin formButton($backgroundColor, $shadowColor) {
+  border: 3px solid transparent;
+  background-color: $backgroundColor;
+  box-shadow: 0px 10px 25px $shadowColor;
+  transition: 0.7s;
+  border-radius: 6px;
+  padding: 1.6rem 3.2rem;
+  cursor: pointer;
+  margin-top: 1rem;
+  @include formText(1.8rem, 800, white);
+
+  &:hover {
+    background-color: transparent;
+    box-shadow: none;
+    border: 3px solid $backgroundColor;
+    transition: 0.7s;
+  }
+}
+
+@mixin brand($fontSize) {
+  font-family: "Mr Tiger";
+  font-style: normal;
+  font-weight: 400;
+  font-size: $fontSize;
+  text-align: center;
+  color: #ffffff;
 }
 
 
-@mixin formButton($backgroundColor, $shadowColor){
-
-    border: 3px solid transparent;
-    background-color: $backgroundColor;
-    box-shadow: 0px 10px 25px $shadowColor;
-    transition:0.7s;
-    border-radius: 6px;
-    padding: 1rem 2rem;
-    cursor: pointer;
-    margin-top:0.5rem;
-    @include formText(1.125rem, 800, white);
-
-    &:hover{
-        background-color: transparent;
-        box-shadow: none;
-        border: 3px solid $backgroundColor;
-        transition: 0.7s;
-    }
+.page-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  height:100%;
+  margin: 0 auto;
+  flex-grow: 1;
+  background: url("/src/assets/images/background_bunny.png") no-repeat fixed;
+  background-size: contain;
+  background-color: #1d1427;
 }
 
-@mixin brand($fontSize){
+a {
+  text-decoration: none;
+  color: inherit;
+}
 
-    font-family: "Mr Tiger";
-    font-style: normal;
-    font-weight: 400;
-    font-size: $fontSize;
+.login-wrapper,
+.signup-wrapper {
+  width: 420px;
+}
+
+.brand {
+  @include brand(3.2rem);
+}
+
+.auth-form-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+
+  p {
     text-align: center;
-    color: #FFFFFF;
+  }
 }
 
-
-
-html{
-    width:100%;
-    height: 100vh;
-    background: url("/src/assets/images/background_bunny.png") no-repeat fixed;
-    background-size: contain;
-    background-color: $darkBlue;
+.auth-heading {
+  @include formText(3.6rem, 700, white);
+  margin-bottom: 0.8rem;
 }
 
-
-.page-wrapper{
-    display:flex;
-    justify-content: flex-end;
+.auth-subheading {
+  @include formText(1.6rem, 400, white);
 }
 
-
-a{
-    text-decoration: none;
-    color:inherit;
+.auth-row {
+  text-align: center;
 }
 
-.login-wrapper, .signup-wrapper{
-    padding: 2rem 10rem 4rem 0rem;
-    // padding-right:10rem;
-}
+.auth-row-outlined {
+  @include border($rowBorder);
 
-.brand{
-    @include brand(2rem);
-}
-
-.auth-form-wrapper{
+  a {
     display: flex;
-    flex-direction: column;
-    gap:2rem;
-    padding:1rem 1rem;
-
-    p{
-        text-align: center;
-    }
-}
-
-.auth-heading{
-    @include formText(2.25rem, 700, white);
-    margin-bottom: 0.5rem;
-}
-
-.auth-subheading{
-    @include formText(1rem, 400, white);
-}
-
-.auth-row{
-    text-align: center;
-}
-
-.auth-row-outlined{ 
-
-    
-    
-    @include border($rowBorder);
-
-    a{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap:0.5rem;
-        padding:0.8rem 1.5rem;
-    }
-
-    span{
-        @include formText(0.875rem, 700, $grayText )
-    }
-}
-
-
-.auth-row-sm{
-    p{
-        @include formText(0.75rem, 600, white)
-    }
-
-    p::before, p::after{
-        content:"-------------";
-        color:#DDDDDD;
-        padding:0.2rem;
-    }
-}
-
-.auth-form{
-
-    display:flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    gap: 0.8rem;
+    padding: 1.2rem 2.4rem;
+  }
 
-    label{
-        @include formText(0.875rem, 600, $grayText);
-    }
-
-    input {
-        @include border($inputBorder);
-        @include formText(0.875rem, 400, white);
-        background-color: $darkBlue!important;
-        padding: 0.6rem 0.6rem;
-        margin-top: 0.2rem;
-        margin-bottom: 1.5rem;
-    }
-    
-
-    input:-webkit-autofill, input:-webkit-autofill:focus {
-        box-shadow:0 0 0 50px $darkBlue inset; 
-        -webkit-text-fill-color: white;
-    }
-
-    input::placeholder{
-        @include formText(0.875rem, 400, #525252);
-    }
-
-    .button-signup{
-        @include formButton($pink, $pinkShadow);
-    }
-
-    .button-login{
-        @include formButton($violet, $violetShadow);
-    }
-
+  span {
+    @include formText(1.4rem, 700, $grayText);
+  }
 }
 
-.auth-row{
-    span{
-        @include formText(1.125rem, 400, white);
-    }
+.auth-row-sm {
+  p {
+    @include formText(1.2rem, 600, white);
+  }
 
-    .link-to-login{
-        @include formText(1.125rem, 600, $pink);
-        padding-left:0.4rem;
-    }
-    .link-to-signup{
-        @include formText(1.125rem, 600, $violet);
-        padding-left:0.4rem;
-    }
+  p::before,
+  p::after {
+    content: "-------------";
+    color: #dddddd;
+    padding: 0.4rem;
+  }
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  label {
+    @include formText(1.4rem, 600, #ffffff);
+  }
+
+  input {
+    @include border($inputBorder);
+    @include formText(1.4rem, 400, white);
+    background-color: $darkBlue;
+    padding: 1rem 1rem;
+    margin-top: 0.4rem;
+    margin-bottom: 2.4rem;
+    height: 4.5rem;
+  }
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:focus {
+    box-shadow: 0 0 0 50px $darkBlue inset;
+    -webkit-text-fill-color: white;
+  }
+
+  input::placeholder {
+    @include formText(1.4rem, 400, #525252);
+  }
+
+  .button-signup {
+    @include formButton($pink, $pinkShadow);
+  }
+
+  .button-login {
+    @include formButton($violet, $violetShadow);
+  }
+
+  .noDisplay {
+    display: none;
+  }
+
+  .errorMessage {
+    display: block;
+    @include formText(1.6rem, 700, $errorRed);
+    margin-bottom: 0.8rem;
+  }
+
+  .highlight{
+    color: #fff;
+    text-shadow:
+    -0.2rem -0.2rem 1rem #fff,
+    0.2rem 0.2rem 1rem #fff,
+    0 0 2rem $errorRed,
+    0 0 4rem $errorRed,
+    0 0 6rem $errorRed,
+    0 0 8rem $errorRed,
+    0 0 10rem $errorRed;
+  }
+}
+
+.auth-row {
+  span {
+    @include formText(1.8rem, 400, white);
+  }
+
+  .link-to-login {
+    @include formText(1.8rem, 600, $pink);
+    padding-left: 0.7rem;
+  }
+  .link-to-signup {
+    @include formText(1.8rem, 600, $violet);
+    padding-left: 0.7rem;
+  }
 }

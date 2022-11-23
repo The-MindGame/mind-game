@@ -1,0 +1,93 @@
+$pink: #d74f71;
+$violet: #432c7a;
+
+
+.central-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    min-height: 100vh;
+  }
+  
+
+@keyframes ldio-nnrk0kfiqbi-r {
+    0%,
+    100% {
+      animation-timing-function: cubic-bezier(0.2 0 0.8 0.8);
+    }
+    50% {
+      animation-timing-function: cubic-bezier(0.2 0.2 0.8 1);
+    }
+    0% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes ldio-nnrk0kfiqbi-s {
+    0%,
+    100% {
+      animation-timing-function: cubic-bezier(0.2 0 0.8 0.8);
+    }
+    50% {
+      animation-timing-function: cubic-bezier(0.2 0.2 0.8 1);
+    }
+    0% {
+      transform: translate(-38.1px, -38.1px) scale(0);
+    }
+    50% {
+      transform: translate(-38.1px, -38.1px) scale(1);
+    }
+    100% {
+      transform: translate(-38.1px, -38.1px) scale(0);
+    }
+  }
+  .ldio-nnrk0kfiqbi > div {
+    transform: translate(0px, -19.05px);
+  }
+  .ldio-nnrk0kfiqbi > div > div {
+    animation: ldio-nnrk0kfiqbi-r 1.0526315789473684s linear infinite;
+    transform-origin: 127px 127px;
+  }
+  .ldio-nnrk0kfiqbi > div > div > div {
+    position: absolute;
+    transform: translate(127px, 104.14px);
+  }
+  .ldio-nnrk0kfiqbi > div > div > div > div {
+    width: 76.2px;
+    height: 76.2px;
+    border-radius: 50%;
+    background: $pink;
+    animation: ldio-nnrk0kfiqbi-s 1.0526315789473684s linear infinite;
+  }
+  .ldio-nnrk0kfiqbi > div > div:last-child {
+    animation-delay: -0.5263157894736842s;
+  }
+  .ldio-nnrk0kfiqbi > div > div:last-child > div > div {
+    animation-delay: -0.5263157894736842s;
+    background: $violet;
+  }
+  .loadingio-spinner-interwind-my24hhwvlb {
+    width: 254px;
+    height: 254px;
+    display: inline-block;
+    overflow: hidden;
+    background: #ffffff;
+  }
+  .ldio-nnrk0kfiqbi {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0) scale(1);
+    backface-visibility: hidden;
+    transform-origin: 0 0; /* see note above */
+  }
+  .ldio-nnrk0kfiqbi div {
+    box-sizing: content-box;
+  }
