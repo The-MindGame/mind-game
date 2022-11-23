@@ -1,1 +1,11 @@
-@import './styles/Auth.scss';
+@import "./styles/Auth.scss";
+@import "./styles/About.scss";
+@import "./styles/Loading.scss";
+@import "./styles/Queries.scss";
+
+.App {
+  display: flex;
+  flex-direction: column;
+  background-color: #1d1427;
+  min-height: 100vh;
+}

@@ -1,0 +1,137 @@
+
+@mixin slideshow_button($backgroundColor){
+    background-color: $backgroundColor;
+    box-shadow: 0px 4.85524px 12.1381px $backgroundColor;
+    padding: 1.8rem;
+    border-radius: 100%;
+    border: 3px solid transparent;
+    display: flex;
+    align-items: center;
+    cursor:pointer;
+
+    &:hover{
+        background-color: transparent;
+        box-shadow: none;
+        border: 3px solid $backgroundColor;
+        transition: 0.5s;
+
+        svg{
+            path{
+                fill:$backgroundColor;
+            }
+        }
+    }
+
+}
+
+@mixin bioText($fontSize, $fontStyle){
+    font-style: $fontStyle;
+    font-weight: 500;
+    color:white;
+    font-size: $fontSize;
+}
+
+.no-back-page-wrapper{
+    display: flex;
+    flex-direction: row;
+    gap: 6rem;
+    padding: 8.5rem 10rem;
+    overflow-x: auto;
+}
+
+
+.images{
+
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    min-width:40%;
+
+    .frame{
+        display:grid;
+        grid-template-columns: 1fr;
+        align-items: center;
+
+        img{
+            width: 100%;
+            max-width: 459px;
+            min-width: 300px;
+            height: auto;
+            border-radius: 10px;
+            border: 2px solid white;
+        }
+
+        .current-image{
+            grid-column: 1/2;
+            grid-row: 1/2;
+            transition: width 5s ease-in-out 5s;
+            z-index: 3;
+            transform: rotate(6deg);
+        }
+
+        .next-image{
+            grid-column: 1/2;
+            grid-row: 1/2;
+            z-index: 2;
+        }
+        .next-2-image{
+            grid-column: 1/2;
+            grid-row: 1/2;
+            z-index: 1;
+            transform: rotate(-7.32deg);
+        }
+    }
+
+    p{
+        width:100%;
+        font-size:2.2rem;
+        color:white;
+        font-weight: 800;
+        text-align: end;
+        padding-right:3rem;
+        margin-top:2rem;
+        margin-bottom: 1rem;
+    }
+
+}
+
+.buttons-wrapper{
+    display: flex;
+    flex-direction: row;
+    gap:5.5rem;
+
+    .left{
+        @include slideshow_button($pink);
+    }
+    
+    .right{
+        @include slideshow_button($violet);
+
+        svg{
+            transform: rotate(180deg);
+        }
+    }
+}
+
+.bio{
+    background: linear-gradient(119.97deg, rgba(143, 115, 210, 0.23) 1.84%, rgba(88, 65, 142, 0) 98.44%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    gap:3rem;
+    padding: 3.5rem;
+    padding-bottom: 5rem;
+    height:fit-content;
+    margin-top:5rem;
+
+    .name{
+        @include bioText(3rem, italic)
+    }
+
+    .description{
+        @include bioText(2rem, normal)
+    }
+}
