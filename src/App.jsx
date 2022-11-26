@@ -44,9 +44,9 @@ function App() {
   return (
   
     <div className="App">
-      {loading ? (<LoadingPage/>) : <div>{current[current.length - 1] === "start" ? <></> : <Navbar />}
+      {loading ? (<LoadingPage/>) : <>{current[current.length - 1] === "start" ? <></> : <Navbar />}
       <Routes>
-        <Route index element={<Home />} />
+        <Route path="/home" index element={<Home />} />
         <Route path="/about-us" element={<AboutPage />} />
         <Route path="/rules" element={<Rules />} />
         <Route element={<ProtectedLogin />}>
@@ -57,7 +57,7 @@ function App() {
         <Route element={<ProtectedRoute />}>
           <Route path="/start" element={<StartGamePage />} />
         </Route>
-      </Routes></div> }
+      </Routes></> }
     
     </div>
   );

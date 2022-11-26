@@ -5,14 +5,12 @@ import videoBg from "../assets/video/themind.mp4";
 
 function HomePage() {
   return (
-    <div className="home" style={{position: "relative"}}>
+    <div className="home">
       <video src={videoBg} autoPlay loop muted />
       <div className="homepageElements">
         <h1 className="homepageTitle">The Mind Game</h1>
         <p className="gameMotto">Unite mind with your friends...</p>
         <div className="homepageButtons">
-          {/* exact to="/login" 
-          exact to="/signup"*/}
           <NavLink to={'/login'} id="loginButton" className="button">
             Login
           </NavLink>
