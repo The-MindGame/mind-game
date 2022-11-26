@@ -11,10 +11,12 @@ function HomePage() {
         <h1 className="homepageTitle">The Mind Game</h1>
         <p className="gameMotto">Unite mind with your friends...</p>
         <div className="homepageButtons">
-          <NavLink exact to="/login" id="loginButton" className="button">
+          {/* exact to="/login" 
+          exact to="/signup"*/}
+          <NavLink to={'/login'} id="loginButton" className="button">
             Login
           </NavLink>
-          <NavLink exact to="/signup" id="signupButton" className="button">
+          <NavLink  to={'/signup'} id="signupButton" className="button">
             Sign up
           </NavLink>
         </div>
