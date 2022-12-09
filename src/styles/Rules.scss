@@ -1,0 +1,206 @@
+@font-face {
+  font-family: "Mr Tiger";
+  src: url("/src/assets/mr-tiger-regular.woff2.ttf");
+}
+
+@font-face {
+  font-family: "Nunito Sans";
+  src: url("/src/assets/NunitoSans-Regular.ttf");
+}
+
+.rulesPage {
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.rulesSidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  height: 85vh;
+  transition: ease-in-out 0.5s;
+  padding: 2rem;
+  padding-top: 0;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  filter: drop-shadow(0px 10px 25px rgba(255, 255, 255, 0.55));
+  border-radius: 4px;
+  color: white;
+  .rulesSidebarItems{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+    gap: 1rem;
+    height: 100%;
+  }
+  &.active {
+    min-width: 30%;
+    border-radius: 20px 4px 60px;
+    .rulesSidebarItem {
+      pointer-events: all;
+      cursor: pointer;
+      .rulesSidebarItemRole {
+        display: block;
+      }
+    }
+  }
+  .rulesSidebarItem {
+    pointer-events: none;
+    display: flex;
+    gap: 1rem;
+    flex-direction: row;
+    align-items: center;
+    margin: 10px 0;
+    font-family: "Mr Tiger";
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.1rem;
+    text-decoration: none;
+    color: white;
+    transition: all 0.3s ease-in-out;
+    .rulesSidebarItemIcon {
+      transition: all 0.3s ease-in-out;
+    }
+    &.selected{
+
+      color: #ffc300;
+      .rulesSidebarItemIcon {
+        transform: rotate(360deg);
+        background: #422b79;
+        box-shadow: 0px 6px 20px #503396;
+        border-radius: 4px;
+      }
+    }
+    &:hover {
+      color: #ffc300;
+      transition: all 0.3s ease-in-out;
+      .rulesSidebarItemIcon {
+        background: #422b79;
+        box-shadow: 0px 6px 20px #503396;
+        border-radius: 4px;
+      }
+    }
+    .rulesSidebarItemRole {
+      font-size: 2vw;
+      display: none;
+    }
+
+  }
+}
+
+.navIcon {
+  width: 60px;
+  height: 22px;
+  position: relative;
+  margin: 30px auto;
+  -webkit-transform: rotate(0deg);
+  -moz-transform: rotate(0deg);
+  -o-transform: rotate(0deg);
+  transform: rotate(0deg);
+  -webkit-transition: 0.5s ease-in-out;
+  -moz-transition: 0.5s ease-in-out;
+  -o-transition: 0.5s ease-in-out;
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+  span {
+    display: block;
+    position: absolute;
+    height: 4px;
+    width: 100%;
+    background: #fff;
+    border-radius: 5px;
+    opacity: 1;
+    left: 0;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: 0.25s ease-in-out;
+    -moz-transition: 0.25s ease-in-out;
+    -o-transition: 0.25s ease-in-out;
+    transition: 0.25s ease-in-out;
+    &:nth-child(1) {
+      top: 0px;
+      -webkit-transform-origin: left center;
+      -moz-transform-origin: left center;
+      -o-transform-origin: left center;
+      transform-origin: left center;
+    }
+    &:nth-child(2) {
+      top: 18px;
+      -webkit-transform-origin: left center;
+      -moz-transform-origin: left center;
+      -o-transform-origin: left center;
+      transform-origin: left center;
+    }
+    &:nth-child(3) {
+      top: 36px;
+      -webkit-transform-origin: left center;
+      -moz-transform-origin: left center;
+      -o-transform-origin: left center;
+      transform-origin: left center;
+    }
+  }
+  &.open {
+    span {
+      &:nth-child(1) {
+        -webkit-transform: rotate(45deg);
+        -moz-transform: rotate(45deg);
+        -o-transform: rotate(45deg);
+        transform: rotate(45deg);
+        top: -3px;
+        left: 8px;
+      }
+      &:nth-child(2) {
+        width: 0%;
+        opacity: 0;
+      }
+      &:nth-child(3) {
+        -webkit-transform: rotate(-45deg);
+        -moz-transform: rotate(-45deg);
+        -o-transform: rotate(-45deg);
+        transform: rotate(-45deg);
+        top: 39px;
+        left: 8px;
+      }
+    }
+  }
+}
+
+.rulesMain {
+  background: linear-gradient(
+    119.97deg,
+    rgba(143, 115, 210, 0.23) 1.84%,
+    rgba(88, 65, 142, 0) 98.44%
+  );
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 2rem;
+  width: 100%;
+  font-size: 2.5rem;
+  color: #fff;
+  .rulesMainTitle {
+    font-family: "Mr Tiger";
+    font-size: 4rem;
+    font-weight: 400;
+    letter-spacing: 0.1rem;
+    text-decoration: none;
+    color: white;
+    margin-bottom: 1rem;
+  }
+  .rulesMainContent {
+    font-family: "Nunito Sans";
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.1rem;
+    text-decoration: none;
+    color: white;
+    margin-bottom: 1rem;
+  }
+}
