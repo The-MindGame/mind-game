@@ -24,13 +24,14 @@ header {
     .navbar-wrapper {
       display: flex;
       .absolute {
+
         border-radius: 9px;
         transition: width 0.5s ease-in-out, left 0.5s ease-in-out;
         position: absolute;
         width: 82px;
         height: 44px;
         background-color: #186053;
-        z-index: 0;
+        z-index: 1;
         left: 0;
         box-shadow: 0px 10px 25px rgba(24, 96, 83, 0.61);
       }
