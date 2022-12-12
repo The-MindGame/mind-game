@@ -54,10 +54,12 @@ video{
 }
 
 .homepageButtons {
+  padding-bottom: 1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   margin: 1rem;
+  font-size: 2rem;
   justify-content: space-evenly;
   .button {
     transition: all 0.3s;
