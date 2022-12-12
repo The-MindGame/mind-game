@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import Dog from "../assets/images/1.png"
 import Arrow from "../assets/icons/Arrow"
 
 
