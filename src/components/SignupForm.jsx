@@ -17,29 +17,41 @@ function SignupForm() {
 
   const [errorMessage, setErrorMessage] = useState("");
   const [passwordMatch, setPasswordMatch] = useState(true);
+  const [lengthCheck , setLengthCheck] = useState(true);
   const [success, setSuccess] = useState(false);
   const [invalidAttempt, setInvalidAttempt] = useState(false);
 
+
+
   // checking whether passwords entered in both fields are corresponding to each other
   useEffect(() => {
-    password && confirmPassword ? setPasswordMatch(password === confirmPassword) : setPasswordMatch(true);
+    password && confirmPassword
+      ? setPasswordMatch(password === confirmPassword)
+      : setPasswordMatch(true);
+
+    password ? (password.length >= 8 ? setLengthCheck(true) : setLengthCheck(false)) : setLengthCheck(true);
   }, [password, confirmPassword, passwordMatch]);
 
-  // to be implemented later
+  
+
   useEffect(() => {
     setErrorMessage("");
-  }, [name, email, password, passwordMatch]);
+  }, [password, passwordMatch]);
 
   const handleSubmit = async (e) => {
     // to prevent refresh
     e.preventDefault();
 
     try {
-      if (passwordMatch) {
+      if (passwordMatch && lengthCheck) {
         setInvalidAttempt(false);
-        const response = await axios.post(`https://backmind-production.up.railway.app/auth/registration`, JSON.stringify({ email, password, name }), {
-          headers: { "Content-Type": "application/json" },
-        });
+        const response = await axios.post(
+          `https://mindgamebackend-production.up.railway.app/auth/registration`,
+          JSON.stringify({ email, password, name }),
+          {
+            headers: { "Content-Type": "application/json" },
+          }
+        );
         setSuccess(true);
         setPassword("");
         navigate("/login");
@@ -59,7 +71,9 @@ function SignupForm() {
     <div className="auth-form-wrapper">
       <div className="auth-row">
         <p className="auth-heading">Create new Account</p>
-        <p className="auth-subheading">See what is going on with your business</p>
+        <p className="auth-subheading">
+          See what is going on with your business
+        </p>
       </div>
 
       <div className="auth-row-outlined">
@@ -74,33 +88,67 @@ function SignupForm() {
       </div>
 
       <form onSubmit={handleSubmit} className="auth-form">
-        <div className="inputs-wrapper">
-          <div className="input-wrapper">
-            <label htmlFor="username">Username</label>
-            <input type="text" onChange={(e) => setName(e.target.value)} value={name} placeholder="luntik" id="username" name="username" required />
-          </div>
+        <label htmlFor="username">Username</label>
+        <input
+          type="text"
+          onChange={(e) => setName(e.target.value)}
+          value={name}
+          placeholder="luntik"
+          id="username"
+          name="username"
+          required
+        />
 
-          <div className="input-wrapper">
-            <label htmlFor="email">E-Mail</label>
-            <input type="email" onChange={(e) => setEmail(e.target.value)} value={email} placeholder="mail@abc.com" id="email" name="email" required />
-          </div>
+        <label htmlFor="email">E-Mail</label>
+        <input
+          type="email"
+          onChange={(e) => setEmail(e.target.value)}
+          value={email}
+          placeholder="mail@abc.com"
+          id="email"
+          name="email"
+          required
+        />
 
-          <div className="input-wrapper">
-            <label htmlFor="password">Password</label>
-            <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} placeholder="*****************" id="password" name="password" required />
-          </div>
+        <label htmlFor="password">Password</label>
+        <input
+          type="password"
+          onChange={(e) => setPassword(e.target.value)}
+          value={password}
+          placeholder="*****************"
+          id="password"
+          name="password"
+          required
+        />
 
-          <div className="input-wrapper">
-            <label htmlFor="confirm-password">Confirm Password</label>
-            <input type="password" onChange={(e) => setConfirmPassword(e.target.value)} value={confirmPassword} placeholder="*****************" id="confirm-password" name="confirm-password" required />
-          </div>
-        </div>
+        <label htmlFor="confirm-password">Confirm Password</label>
+        <input
+          type="password"
+          onChange={(e) => setConfirmPassword(e.target.value)}
+          value={confirmPassword}
+          placeholder="*****************"
+          id="confirm-password"
+          name="confirm-password"
+          required
+        />
 
         <div className="auth-row">
-          <p ref={errorRef} className={`${passwordMatch ? "noDisplay" : "errorMessage"} ${invalidAttempt ? "highlight" : ""}`}>
+          <p
+            ref={errorRef}
+            className={`${passwordMatch ? "noDisplay" : "errorMessage"} ${invalidAttempt ? "highlight" : ""}`}
+          >
             Passwords don't match
           </p>
-          <p ref={errorRef} className={`${errorMessage ? "errorMessage" : "noDisplay"} ${invalidAttempt ? "highlight" : ""}`}>
+          <p
+            ref={errorRef}
+            className={`${lengthCheck ? "noDisplay" : "errorMessage"} ${invalidAttempt ? "highlight" : ""}`}
+          >
+            Password should contain at least 8 characters
+          </p>
+          <p
+            ref={errorRef}
+            className={`${errorMessage ? "errorMessage" : "noDisplay"} ${invalidAttempt ? "highlight" : ""}`}
+          >
             {errorMessage}
           </p>
         </div>

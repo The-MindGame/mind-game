@@ -3,13 +3,19 @@ $violet: #432c7a;
 
 
 .central-div {
+    width:100%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    min-height: 100vh;
   }
+
+h1{
+  color:white;
+  font-size: 3rem;
+}
   
 
 @keyframes ldio-nnrk0kfiqbi-r {
@@ -78,7 +84,7 @@ $violet: #432c7a;
     height: 254px;
     display: inline-block;
     overflow: hidden;
-    background: #ffffff;
+    background: transparent;
   }
   .ldio-nnrk0kfiqbi {
     width: 100%;

@@ -15,6 +15,7 @@ import AboutPage from "./pages/AboutPage";
 import Rules from "./pages/Rules";
 import Navbar from "./components/Navbar.jsx";
 import LoadingPage from "./pages/LoadingPage"
+import ProfilePage from "./pages/ProfilePage";
 
 import { useContext, useEffect, useState } from "react";
 import { authContext } from "./components/Authentication";
@@ -53,8 +54,9 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/sign-up" element={<SignupPage />} />
         </Route>
-
-        <Route element={<ProtectedRoute />}>
+        
+        <Route element={<ProtectedRoute />}>      
+          <Route path="/profile" element={<ProfilePage />} />
           <Route path="/start" element={<StartGamePage />} />
         </Route>
       </Routes></> }
