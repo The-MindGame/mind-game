@@ -14,7 +14,7 @@ function ProtectedLogin() {
     if(auth_string){
         const auth = JSON.parse(auth_string)
         // if user token exists, pass to home(or profile) page, if not, to child route(login/signup page)
-        return (auth.token ? <Navigate to="/"/> : <Outlet/>)  // TO BE CHANGED TO PROFILE
+        return (auth.token ? <Navigate to="/profile"/> : <Outlet/>)
     }else{
         //if cookie doesn't exist pass to login page
         return(<Outlet/>)

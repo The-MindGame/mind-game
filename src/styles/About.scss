@@ -8,6 +8,7 @@
     display: flex;
     align-items: center;
     cursor:pointer;
+    transition: 0.5s;
 
     &:hover{
         background-color: transparent;
@@ -51,6 +52,8 @@
         display:grid;
         grid-template-columns: 1fr;
         align-items: center;
+        margin-bottom: 1rem;
+        min-height: 626px;
 
         img{
             width: 100%;
@@ -64,12 +67,14 @@
         .current-image{
             grid-column: 1/2;
             grid-row: 1/2;
-            transition: width 5s ease-in-out 5s;
             z-index: 3;
             transform: rotate(6deg);
+            transition: left 2000ms ease-in-out, top 2000ms ease-in-out;      
         }
+ 
 
         .next-image{
+
             grid-column: 1/2;
             grid-row: 1/2;
             z-index: 2;
@@ -79,6 +84,8 @@
             grid-row: 1/2;
             z-index: 1;
             transform: rotate(-7.32deg);
+            transition: left 2000ms ease-in-out, top 2000ms ease-in-out;      
+
         }
     }
 

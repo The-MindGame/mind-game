@@ -1,43 +1,8 @@
-$grayText: #828282;
-$fontText: "Nunito Sans";
-$rowBorder: #e8e8e8;
-$inputBorder: #ded2d9;
-$pink: #d74f71;
-$pinkShadow: rgba(215, 79, 113, 0.82);
-$violet: #432c7a;
-$violetShadow: #503396;
-$darkBlue: #1d1427;
-$errorRed: #d32f2f;
-
-@mixin formText($fontSize, $fontWeight, $color) {
-  font-weight: $fontWeight;
-  font-size: $fontSize;
-  color: $color;
-}
-
 @mixin border($color) {
   border: 1px solid $color;
   border-radius: 5px;
 }
 
-@mixin formButton($backgroundColor, $shadowColor) {
-  border: 3px solid transparent;
-  background-color: $backgroundColor;
-  box-shadow: 0px 10px 25px $shadowColor;
-  transition: 0.7s;
-  border-radius: 6px;
-  padding: 1.6rem 3.2rem;
-  cursor: pointer;
-  margin-top: 1rem;
-  @include formText(1.8rem, 800, white);
-
-  &:hover {
-    background-color: transparent;
-    box-shadow: none;
-    border: 3px solid $backgroundColor;
-    transition: 0.7s;
-  }
-}
 
 @mixin brand($fontSize) {
   font-family: "Mr Tiger";
