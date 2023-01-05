@@ -1,0 +1,71 @@
+.game-page {
+  flex-grow: 1;
+  position: relative;
+  // background-color: ;
+  .board {
+    background-color: #d9d9d9;
+    width: 67rem;
+    height: 40rem;
+    border-radius: 26rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .user {
+    left: 50%;
+    bottom: 0;
+    transform: translate(-50%);
+    position: absolute;
+    .user-details {
+      width: 31rem;
+      height: 8rem;
+      background: linear-gradient(119.97deg, #554e67 98.43%, rgba(88, 65, 142, 0) 98.44%);
+      mix-blend-mode: normal;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      p {
+        color: #ffffff;
+        font-size: 3rem;
+      }
+    }
+    .user-cards {
+      height: 22rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      > div {
+        top: 6rem;
+        position: absolute;
+      }
+      > div:first-of-type {
+        transform: matrix(0.95, -0.31, 0.31, 0.95, 0, 0);
+      }
+      > div:nth-of-type(2) {
+        transform: matrix(0.99, -0.14, 0.14, 0.99, 0, 0);
+      }
+      > div:nth-of-type(3) {
+        transform: matrix(1, 0.03, -0.03, 1, 0, 0);
+      }
+      > div:last-of-type {
+        transform: matrix(0.98, 0.2, -0.21, 0.98, 0, 0);
+      }
+    }
+  }
+
+  .level-wrapper {
+    position: absolute;
+    width: 31rem;
+    height: 8rem;
+    bottom: 5rem;
+    right: 5rem;
+    background: linear-gradient(119.97deg, rgba(143, 115, 210, 0.23) 1.84%, rgba(88, 65, 142, 0) 98.44%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+  }
+}
