@@ -9,7 +9,8 @@ import StartGamePage from "./pages/StartGamePage";
 import AboutPage from "./pages/AboutPage";
 import Rules from "./pages/Rules";
 import Navbar from "./components/Navbar.jsx";
-import LoadingPage from "./pages/LoadingPage";
+import LoadingPage from "./pages/LoadingPage"
+import ProfilePage from "./pages/ProfilePage";
 
 import { useContext, useEffect, useState } from "react";
 import { authContext } from "./components/Authentication";

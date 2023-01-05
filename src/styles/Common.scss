@@ -1,0 +1,192 @@
+$grayText: #828282;
+$fontText: "Nunito Sans";
+$rowBorder: #e8e8e8;
+$inputBorder: #ded2d9;
+$pink: #d74f71;
+$pinkShadow: rgba(215, 79, 113, 0.82);
+$violet: #432c7a;
+$violetShadow: #503396;
+$darkBlue: #1d1427;
+$darkGreen: #186053;
+$errorRed: #d32f2f;
+
+
+@mixin formText($fontSize, $fontWeight, $color) {
+    font-weight: $fontWeight;
+    font-size: $fontSize;
+    color: $color;
+  }
+
+
+@mixin formButton($backgroundColor, $shadowColor) {
+    border: 3px solid transparent;
+    background-color: $backgroundColor;
+    box-shadow: 0px 10px 25px $shadowColor;
+    transition: 0.7s;
+    border-radius: 6px;
+    padding: 1.6rem 3.2rem;
+    cursor: pointer;
+    margin-top: 1rem;
+    @include formText(1.8rem, 800, white);
+  
+    &:hover {
+      background-color: transparent;
+      box-shadow: none;
+      border: 3px solid $backgroundColor;
+      transition: 0.7s;
+    }
+  }
+
+
+@mixin playButton(){
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3.5rem;
+    border:none;
+    border-radius: 70%;
+    background: $pink;
+    background: linear-gradient(45deg, $pink 50%, $violet 50%);
+    box-shadow: 0px 10px 25px rgba(215, 79, 113, 0.82);
+    transition: ease-in-out 0.5s;
+}
+
+
+
+.play-button{
+    @include playButton();
+
+    svg{
+        margin-left: 0.5rem;
+    }
+
+    &:active, &:focus{
+        transform: rotate(-90deg);
+        transition: transform 0.5s;
+    }
+}
+
+.popup{
+    display: none;
+    height: 100vh;
+    width: 100vw;
+    background-color: rgba(0, 0, 0, 0.4);
+    position: fixed;
+    top:0;
+    left:0;
+}
+
+.popup.active{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-window{
+    width:50%;
+    padding: 3.6rem 4rem;
+    background-color: white;
+    border-radius:10px;
+    box-shadow: 2px 6px 16px 0px rgba(79,79,79,0.82);
+    -webkit-box-shadow: 2px 6px 16px 0px rgba(79,79,79,0.82);
+    -moz-box-shadow: 2px 6px 16px 0px rgba(79,79,79,0.82);
+}
+
+.popup-content{
+    width:100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 4.5fr 0.5fr 0.5fr 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    font-family: 'Inter';
+
+    .btn-row{
+        grid-column: 1/2;
+        grid-row:1/2;
+        width:100%;
+        display: flex;
+        justify-content: flex-end;
+
+        .close-btn{
+            border:none;
+            background-color: transparent;
+        }
+    }
+
+    h1{
+        grid-column: 1/2;
+        grid-row:3/4;
+        font-weight: 600;
+        font-size: 2.5rem;
+        color: #54595E;
+    }
+
+    h2{
+        grid-column: 1/2;
+        grid-row:4/5;
+        font-weight: 400;
+        font-size: 1.8rem;
+        color: rgba(84, 89, 94, 0.6);
+    }
+
+    .join-room-form{
+        width:55%;
+        grid-column: 1/2;
+        grid-row:5/6;
+        display: flex;
+        justify-content: space-evenly;
+
+        input{
+            display: flex;
+            align-items: center;
+            padding: 1.35rem 1.6rem;
+            border: 1px solid #D1D1D1;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 1.5rem;
+        }
+
+        button{
+            border: 3px solid transparent;
+            background-color: $violet;
+            box-shadow: 0px 10px 25px $violetShadow;
+            transition: 0.7s;
+            border-radius: 6px;
+            padding: 0rem 1.1rem;
+            cursor: pointer;
+
+            svg{
+                width:2rem;
+                height:2rem;
+                margin-top:0.2rem;
+                margin-left:0.2rem;
+            }
+        }
+    }
+
+    .create-room-btn{
+        @include formButton($pink, $pinkShadow);
+        width:55%;
+        grid-column: 1/2;
+        grid-row: 6/7;
+        font-weight: 400;
+        font-size: 1.5rem;
+
+        &:hover{
+            color:$pink;
+        }
+    }
+}
+
+.popup-video{
+    grid-row: 2/3;
+    width:55%;
+    position: relative;
+    margin-bottom:5rem;
+    border-radius: 10px;
+    box-shadow: 2px 6px 16px 0px rgba(79,79,79,0.82);
+    -webkit-box-shadow: 2px 6px 16px 0px rgba(79,79,79,0.82);
+    -moz-box-shadow: 2px 6px 16px 0px rgba(79,79,79,0.82);
+}

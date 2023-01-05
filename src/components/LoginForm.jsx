@@ -20,7 +20,7 @@ function LoginForm() {
 
     try {
       const response = await axios.post(
-        `https://backmind-production.up.railway.app/auth/login`,
+        `https://mindgamebackend-production.up.railway.app/auth/login`,
         { email, password }
       );
       const token = response.data.token;

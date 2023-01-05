@@ -43,9 +43,8 @@ function AboutPage() {
  
 
   const nextImg = () => {
-    activeImage === 5 ? setActiveImage(1) : setActiveImage(activeImage+1)
+    activeImage === 5 ? setActiveImage(1) : setActiveImage(activeImage+1)   
     window.scrollTo({ top: 100, behavior: 'smooth' });
-
   }
 
   const prevImg = () => {
@@ -54,20 +53,21 @@ function AboutPage() {
   }
 
 
+
   return (
     <div className="no-back-page-wrapper">
       <div className="images">
 
         <div className="frame">
-            <img className="current-image" src={`/src/assets/images/ducks/${activeImage}.png`} />
-            <img className="next-image" src={`/src/assets/images/ducks/${activeImage === 5 ? activeImage-4 : activeImage + 1}.png`} />
-            <img className="next-2-image" src={`/src/assets/images/ducks/${activeImage === 4 || activeImage === 5 ? activeImage-3 : activeImage + 2}.png`} />
+            <img key={activeImage} className="current-image" src={`/src/assets/images/ducks/${activeImage}.png`} />            
+            <img key={activeImage + 1} className="next-image" src={`/src/assets/images/ducks/${activeImage === 5 ? activeImage-4 : activeImage + 1}.png`} />
+            <img key={activeImage + 2} className="next-2-image" src={`/src/assets/images/ducks/${activeImage === 4 || activeImage === 5 ? activeImage-3 : activeImage + 2}.png`} />
         </div>
 
         <p>{activeImage}/5</p>
         <div className="buttons-wrapper">
           <button className='left' onClick={prevImg}><Arrow /></button>
-          <button className='right' onClick={nextImg}><Arrow /></button>
+          <button className='right' id='right' onClick={nextImg}><Arrow /></button>
         </div>
       </div>
 
