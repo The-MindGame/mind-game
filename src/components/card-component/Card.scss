@@ -1,0 +1,30 @@
+.card-wrapper {
+  width: 140.39px;
+  height: 195.96px;
+  background: #1d1427;
+  border: 1px solid #d2d2d2;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  img {
+    height: 15rem;
+  }
+  p {
+    font-weight: 400;
+    font-size: 3rem;
+    color: #ffffff;
+    font-family: "Mr Tiger";
+  }
+  .bottom {
+    position: absolute;
+    right: 0.5rem;
+    bottom: 0.5rem;
+  }
+  .top {
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+  }
+}
