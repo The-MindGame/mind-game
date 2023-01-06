@@ -2,8 +2,14 @@ import React from 'react'
 import PlayIcon from '../assets/icons/PlayIcon'
 import bunnyVid from "../assets/video/popup_bunny.mp4"
 import CloseIcon from "../assets/icons/CloseIcon"
+import Cookies from 'js-cookie'
+
 
 function StartGamePopup({popup, setPopup}) {
+
+  const auth_string = Cookies.get("user");
+  const token = (auth_string ? JSON.parse(auth_string).token : "");
+
 
   return (
     <div className = {`popup ${popup ? "active" : ""}`}>
@@ -23,7 +29,7 @@ function StartGamePopup({popup, setPopup}) {
               <button><PlayIcon/></button>
             </form>
             
-            <button className='create-room-btn'>Create the Room</button>
+            <button  className='create-room-btn'>Create the Room</button>
           </div>
         </div>
     </div>
