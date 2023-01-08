@@ -1,5 +1,7 @@
 import "../styles/GamePage.scss";
 import { Card } from "../components/card-component/Card";
+import {useEffect} from "react"
+import { useLocation, useNavigate } from "react-router-dom";
 
 const cards = [
   {
@@ -21,8 +23,18 @@ const cards = [
 ];
 
 export default function GamePage() {
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if(!location.state?.boardPassword){navigate("/home")};
+  }, [])
+  
+
   return (
     <div className="game-page">
+      <h1>Board Password : {location.state?.boardPassword}</h1>
       <div className="board"></div>
       <div className="user">
         <div className="user-cards">

@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
 import "../styles/Navbar.scss";
 import Cookies from 'js-cookie'
-import Bunny from "../assets/images/bunny.png"
+import Bunny from "../assets/images/profilebunny.png"
 
 
 const navbarElements = [

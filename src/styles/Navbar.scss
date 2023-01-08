@@ -78,6 +78,10 @@ header {
   }
 }
 
+.profile-navbar{
+  z-index: 1;
+}
+
 .profile-pic {
   display: flex;
   align-items: center;
@@ -98,8 +102,7 @@ header {
   min-width: 25rem;
   position: absolute;
   margin-top: 1rem;
-  right: 10rem;
-
+  right: 10rem; 
   display: flex;
   flex-direction: column;
   justify-content: center;

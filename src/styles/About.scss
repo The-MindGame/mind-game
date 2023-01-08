@@ -34,10 +34,22 @@
 
 .no-back-page-wrapper{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     gap: 6rem;
     padding: 8.5rem 10rem;
     overflow-x: auto;
+}
+
+.about-elements{
+    display: flex;
+    gap: 6rem;
+    padding-bottom: 3rem;
+    overflow-x: auto;
+}
+
+.startgame-popup-container{
+    display: flex;
+    justify-content: flex-end;
 }
 
 .images{
@@ -52,6 +64,8 @@
         display:grid;
         grid-template-columns: 1fr;
         align-items: center;
+        margin-bottom: 1rem;
+        min-height: 626px;
         margin-bottom: 1rem;
 
         img{
@@ -71,8 +85,10 @@
             transform: rotate(6deg);
             transition: 0.3s ease-in-out  ;
         }
+ 
 
         .next-image{
+
 
             grid-column: 1/2;
             grid-row: 1/2;

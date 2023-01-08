@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import StartGamePopup from '../components/StartGamePopup'
+import PlayIcon from '../assets/icons/PlayIcon'
 import Arrow from "../assets/icons/Arrow"
 import one from "../assets/images/ducks/1.png"
 import two from "../assets/images/ducks/2.png"
@@ -7,6 +9,8 @@ import four from "../assets/images/ducks/4.png"
 import five from "../assets/images/ducks/5.png"
 
 function AboutPage() {
+
+  const [popup, setPopup] = useState(false);
 
   const authors = [
     {
@@ -64,6 +68,7 @@ function AboutPage() {
 
   return (
     <div className="no-back-page-wrapper">
+      <div className="about-elements">
       <div className="images">
 
         <div className="frame">
@@ -87,7 +92,12 @@ function AboutPage() {
           {currentAuthor.description}
         </p>
       </div>
-        
+      </div>
+
+      <div className="startgame-popup-container">
+        <button className='play-button' onClick={()=>{setPopup(!popup)}}><PlayIcon /></button>
+        <StartGamePopup popup = {popup} setPopup = {setPopup}/>
+      </div>
     </div>
   )
 }
