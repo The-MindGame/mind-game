@@ -23,6 +23,8 @@ const cards = [
 ];
 
 export default function GamePage() {
+  // const [numOfPlayers, setNum]
+  const isAdmin = location.state?.isAdmin;
 
   const location = useLocation();
   const navigate = useNavigate();

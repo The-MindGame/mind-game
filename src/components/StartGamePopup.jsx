@@ -22,24 +22,26 @@ function StartGamePopup({popup, setPopup}) {
   const {socket} = useContext(socketContext);
 
   const createRoom = () => {
+    console.log((auth_string ? JSON.parse(auth_string).email : ""))
     socket.emit('createRoom', {token:token, numberOfPlayers: numberOfPlayers}); 
   }
 
   useEffect(() => {
     socket.on('generatedPassword', (data) => {
       console.log(data);
-      if(data){navigate("/game", {state: {boardPassword: data}})}
+      if(data){navigate("/gamewait", {state: {boardPassword: data, isAdmin: true, numberOfPlayers: numberOfPlayers}})}
       // console.log(data);
     })
 
     socket.on('joinedRoom', (data) => {
       console.log(data);
-      if(data){navigate("/game", {state: {boardPassword: data}})}
+      if(data){navigate("/gamewait", {state: {boardPassword: data, isAdmin: false, numberOfPlayers: numberOfPlayers, currentNumberOfPlayers: data?.users.length}})}
     })
   }, [socket]);
 
 
   const joinRoom = () => {
+    console.log((auth_string ? JSON.parse(auth_string).email : ""))
     socket.emit('joinRoom', {boardPassword: boardPassword, token: token});
   }
 
