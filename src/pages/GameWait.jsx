@@ -9,25 +9,19 @@ function GameWait() {
   const location = useLocation();
   const navigate = useNavigate();
   const isAdmin = location.state?.isAdmin;
-  //
-  const currentNum = location.state?.currentNumberOfPlayers
-    ? location.state?.currentNumberOfPlayers
-    : 1;
-
+  const currentNum = location.state?.currentNumberOfPlayers ? location.state?.currentNumberOfPlayers : 1;
   const { socket } = useContext(socketContext);
-
-  const [numOfPlayers, setnumOfPlayers] = useState(currentNum);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
+    console.log(location.state);
     if (!location.state?.boardPassword) {
       navigate("/home");
     }
-  }, []);
-
-  useEffect(() => {
-    socket.on("message", () => {
-      console.log("HELLO");
-      setnumOfPlayers(numOfPlayers + 1);
+    socket.on("message", (data) => {
+      console.log("message data", data);
+      setUsers(data.users);
+      // setnumOfPlayers(numOfPlayers + 1);
     });
   }, []);
 
@@ -58,9 +52,11 @@ function GameWait() {
       </div>
 
       <div className="user-list">
-        {console.log(numOfPlayers)}
-        <h1>{numOfPlayers}</h1>
-        <h1>{isAdmin ? location.state?.boardPassword : "board pass here"}</h1>
+        <h1>{users.length}</h1>
+        {users.map((user) => {
+          return <h1 className="username">{user.name}</h1>;
+        })}
+        <h1>{isAdmin ? location.state?.boardPassword : location.state.boardPassword.boardPassword}</h1>
       </div>
 
       <button onClick={startGame}></button>
