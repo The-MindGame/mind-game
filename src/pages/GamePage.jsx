@@ -24,7 +24,6 @@ const cards = [
 
 export default function GamePage() {
   const isAdmin = location.state?.isAdmin;
-
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -32,6 +31,7 @@ export default function GamePage() {
     if (!location.state?.boardPassword) {
       navigate("/home");
     }
+    console.log(location.state.currentUserId, " current user id");
   }, []);
 
   return (

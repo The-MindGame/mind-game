@@ -14,6 +14,7 @@ function StartGamePopup({ popup, setPopup }) {
 
   const auth_string = Cookies.get("user");
   const token = auth_string ? JSON.parse(auth_string).token : "";
+  const userEmail = auth_string ? JSON.parse(auth_string).email : "";
   const navigate = useNavigate();
   if (!token) {
     navigate("/login");
@@ -22,28 +23,25 @@ function StartGamePopup({ popup, setPopup }) {
   const { socket } = useContext(socketContext);
 
   const createRoom = () => {
-    console.log(auth_string ? JSON.parse(auth_string).email : "");
-    socket.emit("createRoom", { token: token, numberOfPlayers: numberOfPlayers });
+    socket.emit("createRoom", { token, numberOfPlayers });
   };
 
   useEffect(() => {
     socket.on("generatedPassword", (boardPassword) => {
       if (boardPassword) {
-        navigate("/gamewait", { state: { boardPassword, isAdmin: true, numberOfPlayers: numberOfPlayers } });
+        navigate("/gamewait", { state: { boardPassword, isAdmin: true, numberOfPlayers, userEmail } });
       }
-      console.log(boardPassword, " the board password");
     });
-
     socket.on("joinedRoom", (data) => {
-      console.log(data, " here is the data");
+      console.log("joined room", data);
       if (data) {
-        navigate("/gamewait", { state: { boardPassword: data, isAdmin: false, numberOfPlayers: numberOfPlayers, currentNumberOfPlayers: data?.users.length } });
+        console.log(data);
+        navigate("/gamewait", { state: { boardPassword: data, isAdmin: false, numberOfPlayers, userEmail } });
       }
     });
   }, [socket]);
 
   const joinRoom = () => {
-    console.log(auth_string ? JSON.parse(auth_string).email : "");
     socket.emit("joinRoom", { boardPassword: boardPassword, token: token });
   };
 
