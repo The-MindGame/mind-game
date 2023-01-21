@@ -94,10 +94,6 @@ function AboutPage() {
       </div>
       </div>
 
-      <div className="startgame-popup-container">
-        <button className='play-button' onClick={()=>{setPopup(!popup)}}><PlayIcon /></button>
-        <StartGamePopup popup = {popup} setPopup = {setPopup}/>
-      </div>
     </div>
   )
 }

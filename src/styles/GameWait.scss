@@ -6,3 +6,7 @@
     border-radius: 20px;
   }
 }
+
+.start-game{
+  @include formButton($pink, $pinkShadow);
+}

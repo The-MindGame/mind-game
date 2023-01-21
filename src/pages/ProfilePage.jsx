@@ -17,6 +17,10 @@ function ProfilePage() {
     const [popup, setPopup] = useState(false);
     const navigate = useNavigate();
 
+    const user_cookie = Cookies.get("user");
+    const user_obj = user_cookie ? JSON.parse(user_cookie) : {};
+    // console.log(user_obj);
+
     useEffect(() => {
         setLoading(true);
         axios

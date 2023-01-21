@@ -27,16 +27,15 @@ function StartGamePopup({ popup, setPopup }) {
   };
 
   useEffect(() => {
-    socket.on("generatedPassword", (boardPassword) => {
-      if (boardPassword) {
-        navigate("/gamewait", { state: { boardPassword, isAdmin: true, numberOfPlayers, userEmail } });
+    socket.on('Created Room', (returnObj) => {
+      if (returnObj) {
+        navigate("/gamewait", { state: { boardPassword: returnObj.generatedPassword, boardId: returnObj.boardId, isAdmin: true, numberOfPlayers, userEmail } });
       }
     });
-    socket.on("joinedRoom", (data) => {
-      console.log("joined room", data);
-      if (data) {
-        console.log(data);
-        navigate("/gamewait", { state: { boardPassword: data, isAdmin: false, numberOfPlayers, userEmail } });
+    socket.on("joinedRoom", (board) => {
+      console.log("joined room", board);
+      if (board) {
+        navigate("/gamewait", { state: { board: board, boardId:board.id, isAdmin: false, numberOfPlayers, userEmail, currentUsers: board.users } });
       }
     });
   }, [socket]);

@@ -5,45 +5,91 @@ import { useNavigate } from "react-router-dom";
 import { socketContext } from "../components/SocketProvider";
 import { useContext } from "react";
 import axios from "axios";
-import "../styles/GameWait.scss";
+import Cookies from "js-cookie";
 
 function GameWait() {
   const location = useLocation();
   const navigate = useNavigate();
   const isAdmin = location.state?.isAdmin;
-  const currentNum = location.state?.currentNumberOfPlayers ? location.state?.currentNumberOfPlayers : 1;
   const { socket } = useContext(socketContext);
   const [users, setUsers] = useState([]);
-  let currentUserId;
+  // const [currentUser, setCurrentUser] = useState();
+  const boardId = location.state?.boardId;
+  const [currentUserId, setCurrentUserId] = useState();
+  // const boardPass = location.state?.boardPassword;
+  // let currentUserId;
+  const [currentNum, setCurrentNum] = useState(0);
+  const currentUsers = location.state?.currentUsers;
+  const [joinedNum, setJoinedNum] = useState(0);
 
-  const getUserCards = async function () {
-    const response = await axios.get(`https://mindgamebackend-production.up.railway.app/board/${currentUserId}/getCards`);
+
+  const getUsers = async function () {
+    const response = await axios.get(`https://mindgamebackend-production.up.railway.app/board/${boardId}/getUsers`);
+    setUsers(response.data);
+    setCurrentNum(response.data.length);
   };
 
+
   useEffect(() => {
-    if (!location.state?.boardPassword) {
-      navigate("/home");
-    }
+    const currentUser = users?.find((user) => {
+      // console.log(user.email, location.state.userEmail);
+      return user.email === location.state.userEmail;
+    });
+    console.log(currentUser);
+    setCurrentUserId(currentUser?.id);
+  }, [users])
 
-    socket.on("message", (roomData) => {
-      console.log(roomData, " roomdata");
-      setUsers(roomData.users);
-      const currentUser = roomData.users.find((user) => {
-        return user.email === location.state.userEmail;
+  useEffect(()=>{
+    getUsers();
+
+    socket.on('GAME STARTED!', () => {
+      console.log("started");
+      console.log(boardId);
+      console.log(currentUserId);
+      navigate("/game", {
+        state: {isAdmin: isAdmin, numOfPlayers: location.state?.numberOfPlayers, userId: currentUserId, boardId: boardId},
       });
-      currentUserId = currentUser.id;
-      getUserCards();
+    })
+  },[])
+
+
+  const auth_string = Cookies.get("user");
+  const token = auth_string ? JSON.parse(auth_string).token : "";
+
+  // useEffect(()=>{console.log(location.state)},[]);
+
+  useEffect(() => {
+    // if (!location.state?.boardPassword) {
+    //   navigate("/home");
+    // }
+
+    socket.on('someoneJoinedRoom', (roomData) => {
+      console.log(roomData, " roomdata");
+      getUsers();
+      // console.log("users", users);
     });
 
-    return () => {
-      socket.on("leaveRoom");
-    };
-  }, []);
 
-  const startGame = () => {
-    navigate("/game", {
-      state: { numOfPlayers: location.state?.numberOfPlayers, currentUserId },
-    });
+    socket.on('GAME STARTED!', () => {
+      console.log("started");
+      console.log(boardId);
+      console.log(currentUserId);
+      navigate("/game", {
+        state: {isAdmin: isAdmin, numOfPlayers: location.state?.numberOfPlayers, userId: currentUserId, boardId: boardId},
+      });
+    })
+
+    // return () => {
+    //   // socket.on("leaveRoom");
+    // };
+  }, [boardId, users, currentUserId]);
+
+
+  const startGame = (e) => {
+    
+    e.preventDefault();
+    console.log(boardId, token);
+    socket.emit('gameStart', {boardId, token});
   };
 
   return (
@@ -67,18 +113,18 @@ function GameWait() {
       </div>
 
       <div className="user-list">
-        <h1>{users.length}</h1>
-        <h1>Room id: {isAdmin ? location.state?.boardPassword : location.state.boardPassword.boardPassword}</h1>
-        {users.map((user, index) => {
+        <h1>{currentNum}</h1>
+        <h1>Room id: {isAdmin ? location.state?.boardPassword : location.state.board.boardPassword}</h1>
+        {users?.map((user, index) => {
           return (
-            <h1 className="username">
+            <h1 key={index} className="username">
               {index + 1}. {user.name}
             </h1>
           );
         })}
       </div>
-
-      <button onClick={startGame}>Start the game</button>
+        {isAdmin ? <button onClick={startGame} className="start-game">Start the game</button> : <></>}
+      
     </div>
   );
 }

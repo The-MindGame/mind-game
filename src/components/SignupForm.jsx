@@ -105,6 +105,9 @@ function SignupForm() {
           <p ref={errorRef} className={`${errorMessage ? "errorMessage" : "noDisplay"} ${invalidAttempt ? "highlight" : ""}`}>
             {errorMessage}
           </p>
+          <p ref={errorRef} className={`${lengthCheck ? "noDisplay" : "errorMessage"} ${invalidAttempt ? "highlight" : ""}`}>
+            Password should have at least 8 characters
+          </p>
         </div>
 
         <button type="submit" className="button-signup">
