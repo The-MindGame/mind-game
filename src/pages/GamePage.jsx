@@ -5,27 +5,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { socketContext } from "../components/SocketProvider";
 import axios from "axios";
 import { useState } from "react";
+import Cookies from "js-cookie";
+import partyParrot from "../assets/images/party-parrot.gif"
+import sadPepe from "../assets/images/crying-pepe.gif"
+import { Link } from "react-router-dom";
+import PartyEmoji from "../assets/icons/PartyEmoji"
+import SadEmoji from "../assets/icons/SadEmoji"
 
-
-const cards = [
-  {
-    id: 1,
-    value: 13,
-  },
-  {
-    id: 2,
-    value: 14,
-  },
-  {
-    id: 3,
-    value: 15,
-  },
-  {
-    id: 4,
-    value: 99,
-  },
-];
-
+const auth_string = Cookies.get("user");
+const email = auth_string ? JSON.parse(auth_string).email : "";
 
 
 export default function GamePage() {
@@ -34,14 +22,23 @@ export default function GamePage() {
   
   const location = useLocation();
   const navigate = useNavigate();
+
   const isAdmin = location.state?.isAdmin;
   const currentUserId = location.state?.userId;
-  // const [currentUserId, setCurrentUserId]
   const boardId = location.state?.boardId;
+  const users = location.state?.users;
+  const currentUser = users?.find((user) => {
+    return user.email === email;
+  });
+
+  console.log(currentUser);
+
   const [userCards, setUserCards] = useState([]);
   const [boardCards, setBoardCards] = useState([]);
   const [endGame, setEndGame] = useState(false);
   const [messageEndGame, setMessageEndGame] = useState("");
+  const [win, setWin] = useState(false);
+  const [round, setRound] = useState(1);
   
 
   const getUserCards = async function () {
@@ -63,23 +60,26 @@ export default function GamePage() {
       }
     })
   }, [])
-  
 
   useEffect(()=>{
     
     socket.on('New Round', () => {
+      console.log("NEW ROUND FROM SERVER");
       getUserCards();
+      setBoardCards([]);
     })
 
     socket.on('Game Over', (message) => {
       console.log(message);
       setEndGame(true);
+      setWin(false)
       setMessageEndGame(message);
     })
 
     socket.on('Victory', (message) => {
       console.log(message);
       setEndGame(true);
+      setWin(true)
       setMessageEndGame(message);
     })
   },[])
@@ -102,10 +102,26 @@ export default function GamePage() {
 
   return (
     <div className="game-page">
-      <h1>User ID : {currentUserId}</h1>
+      
       {/* {isAdmin ? <button onClick={destroyRoom}>End the Game</button> : <></>} */}
 
-      {endGame ? <h1>{messageEndGame}</h1> : <div className="page-wrapper">
+      {endGame ? 
+      <div className="window-wrapper">
+        <div className="endgame-window">
+          <div className="endgame-content">
+            <img src={win ? partyParrot : sadPepe} className="parrot"></img>
+            <h1 className="endgame-message">{win ? <PartyEmoji/> : <SadEmoji/>}{win ? "You Won! Congratulations!" : "Game Over. You Lost ..."}{win ? <PartyEmoji/> : <SadEmoji/>}</h1>
+            <Link to="/home" className="back-button"> Back to Home Page</Link>
+          </div>
+        </div>
+      </div> 
+      : <div className="page-wrapper">
+        <h1>Round : {round}</h1>
+        {
+          users.filter(user => user.id != currentUserId).map((user, index) => {
+              return <div className={"user-" + index}>{user.name}</div>
+          })
+        }
         <div className="board-wrapper">
           <div className="board-border">
             <div className="board">
@@ -124,10 +140,10 @@ export default function GamePage() {
           })}
         </div>
         <div className="user-details">
-          <p>Luntik</p><button onClick={getUserCards}>get cards</button>
+          <p>{currentUser?.name} <span>User ID : {currentUserId}</span></p>
         </div>
       </div>
-      <div className="level-wrapper"></div></div>}
+    </div>}
 
     </div>
   );

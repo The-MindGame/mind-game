@@ -3,22 +3,59 @@
   position: relative;
   background: #186053;
 
-  h1{
+  .page-wrapper{
+    background-color: transparent;
+
+    h1{
+      @include formText(2rem, 600, white);
+      padding:0.8rem;
+    }
+  }
+
+  .user-0, .user-1, .user-2{
+    background: linear-gradient(119.97deg, #554E67 98.43%, rgba(88, 65, 142, 0) 98.44%);
+    mix-blend-mode: normal;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    width: 25rem;
+    height: 8rem;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     @include formText(2rem, 600, white);
-    padding:0.8rem;
+  }
+
+  .user-0{
+    position: absolute;
+    top:7%;
+    left: calc(0.5 * (100% - 25rem));
+  }
+
+  .user-1{
+    position: absolute;
+    top: calc(0.5 * (100% - 8rem));
+    left:2%;
+  }
+
+  .user-2{
+    position: absolute;
+    top: calc(0.5 * (100% - 8rem));
+    right:2%;
   }
 
   .board-wrapper{
     box-shadow: 1px 2px 43px 1px rgba(0,0,0,1);
-  -webkit-box-shadow: 1px 2px 43px 1px rgba(0,0,0,1);
-  -moz-box-shadow: 1px 2px 43px 1px rgba(0,0,0,1);
-  width: 75rem;
-  height: 48rem;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 1rem;
+    -webkit-box-shadow: 1px 2px 43px 1px rgba(0,0,0,1);
+    -moz-box-shadow: 1px 2px 43px 1px rgba(0,0,0,1);
+    width: 75rem;
+    height: 48rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 1rem;
   }
 
   .board-border{
@@ -48,7 +85,7 @@
     -moz-box-shadow: 1px 2px 43px 1px rgba(0,0,0,1) inset;
 
     .card-wrapper{
-      transform: scale(0.7);
+      transform: scale(0.6);
     }
   }
   .user {
@@ -61,14 +98,17 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding:0.5rem;
+
       p {
         display: flex;
         align-items: center;
         justify-content: center;
+        flex-direction: column;
         color: #ffffff;
         width: 31rem;
         height: 8rem;
-        font-size: 3rem;
+        font-size: 2.5rem;
         background: linear-gradient(119.97deg, #554e67 98.43%, rgba(88, 65, 142, 0) 98.44%);
         mix-blend-mode: normal;
         border: 1px solid rgba(255, 255, 255, 0.2);
@@ -109,5 +149,59 @@
     background: linear-gradient(119.97deg, rgba(143, 115, 210, 0.23) 1.84%, rgba(88, 65, 142, 0) 98.44%);
     border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 20px;
+  }
+}
+
+.window-wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index:1000;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  top:0;
+  left:0;
+}
+
+.endgame-window{
+  height:75%;
+  width:50%;
+  padding: 2rem 2rem;
+  background-color: white;
+  border-radius:10px;
+  box-shadow: 2px 6px 16px 0px rgba(79,79,79,0.82);
+  -webkit-box-shadow: 2px 6px 16px 0px rgba(79,79,79,0.82);
+  -moz-box-shadow: 2px 6px 16px 0px rgba(79,79,79,0.82);
+}
+
+.endgame-content{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+  height:100%;
+}
+
+.parrot{
+  width:20rem;
+}
+
+.endgame-message{
+  @include formText(3rem, 600, black);  
+  width:100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly; 
+
+}
+
+
+.back-button{
+  @include formButton($violet, $violetShadow);
+
+  &:hover{
+    color:$violet;
   }
 }

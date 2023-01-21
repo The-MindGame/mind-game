@@ -9,4 +9,14 @@
 
 .start-game{
   @include formButton($pink, $pinkShadow);
+  &:disabled{
+    cursor:inherit;
+    background-color: #828282!important;
+    box-shadow: 0px 10px 25px #5e5e5e;
+
+    &:hover{
+      background-color: #828282!important;
+      box-shadow: 0px 10px 25px #5e5e5e;
+    }
+}
 }

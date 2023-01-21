@@ -8,20 +8,20 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 function GameWait() {
+  const { socket } = useContext(socketContext);
+
   const location = useLocation();
   const navigate = useNavigate();
+  
   const isAdmin = location.state?.isAdmin;
-  const { socket } = useContext(socketContext);
-  const [users, setUsers] = useState([]);
-  // const [currentUser, setCurrentUser] = useState();
   const boardId = location.state?.boardId;
+  const numberOfPlayers = location.state?.numberOfPlayers;
+  
+  const [users, setUsers] = useState([]);
   const [currentUserId, setCurrentUserId] = useState();
-  // const boardPass = location.state?.boardPassword;
-  // let currentUserId;
   const [currentNum, setCurrentNum] = useState(0);
-  const currentUsers = location.state?.currentUsers;
-  const [joinedNum, setJoinedNum] = useState(0);
 
+  console.log(location.state?.board);
 
   const getUsers = async function () {
     const response = await axios.get(`https://mindgamebackend-production.up.railway.app/board/${boardId}/getUsers`);
@@ -32,41 +32,33 @@ function GameWait() {
 
   useEffect(() => {
     const currentUser = users?.find((user) => {
-      // console.log(user.email, location.state.userEmail);
       return user.email === location.state.userEmail;
     });
-    console.log(currentUser);
     setCurrentUserId(currentUser?.id);
   }, [users])
+
 
   useEffect(()=>{
     getUsers();
 
     socket.on('GAME STARTED!', () => {
-      console.log("started");
-      console.log(boardId);
-      console.log(currentUserId);
       navigate("/game", {
         state: {isAdmin: isAdmin, numOfPlayers: location.state?.numberOfPlayers, userId: currentUserId, boardId: boardId},
       });
     })
   },[])
 
-
   const auth_string = Cookies.get("user");
   const token = auth_string ? JSON.parse(auth_string).token : "";
 
-  // useEffect(()=>{console.log(location.state)},[]);
-
   useEffect(() => {
-    // if (!location.state?.boardPassword) {
-    //   navigate("/home");
-    // }
+    if (!location.state?.boardId) {
+      navigate("/home");
+    }
 
     socket.on('someoneJoinedRoom', (roomData) => {
       console.log(roomData, " roomdata");
       getUsers();
-      // console.log("users", users);
     });
 
 
@@ -75,13 +67,10 @@ function GameWait() {
       console.log(boardId);
       console.log(currentUserId);
       navigate("/game", {
-        state: {isAdmin: isAdmin, numOfPlayers: location.state?.numberOfPlayers, userId: currentUserId, boardId: boardId},
+        state: {isAdmin: isAdmin, numOfPlayers: location.state?.numberOfPlayers, userId: currentUserId, boardId: boardId, users:users},
       });
     })
 
-    // return () => {
-    //   // socket.on("leaveRoom");
-    // };
   }, [boardId, users, currentUserId]);
 
 
@@ -91,6 +80,7 @@ function GameWait() {
     console.log(boardId, token);
     socket.emit('gameStart', {boardId, token});
   };
+
 
   return (
     <div className="game-wait central-div">
@@ -123,8 +113,8 @@ function GameWait() {
           );
         })}
       </div>
-        {isAdmin ? <button onClick={startGame} className="start-game">Start the game</button> : <></>}
-      
+      {console.log(numberOfPlayers, currentNum, numberOfPlayers == currentNum)}
+        {isAdmin ? <button onClick={startGame} className="start-game" disabled={!(numberOfPlayers == currentNum)}>Start the game</button> : <></>}
     </div>
   );
 }

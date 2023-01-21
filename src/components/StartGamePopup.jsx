@@ -26,23 +26,25 @@ function StartGamePopup({ popup, setPopup }) {
     socket.emit("createRoom", { token, numberOfPlayers });
   };
 
+
   useEffect(() => {
     socket.on('Created Room', (returnObj) => {
       if (returnObj) {
-        navigate("/gamewait", { state: { boardPassword: returnObj.generatedPassword, boardId: returnObj.boardId, isAdmin: true, numberOfPlayers, userEmail } });
+        navigate("/gamewait", { state: { boardPassword: returnObj.generatedPassword, boardId: returnObj.boardId, isAdmin: true, numberOfPlayers : numberOfPlayers, userEmail } });
       }
     });
     socket.on("joinedRoom", (board) => {
-      console.log("joined room", board);
       if (board) {
-        navigate("/gamewait", { state: { board: board, boardId:board.id, isAdmin: false, numberOfPlayers, userEmail, currentUsers: board.users } });
+        navigate("/gamewait", { state: { board: board, boardId:board.id, isAdmin: false, numberOfPlayers : numberOfPlayers, userEmail, currentUsers: board.users } });
       }
     });
-  }, [socket]);
+  }, [socket, numberOfPlayers]);
+
 
   const joinRoom = () => {
     socket.emit("joinRoom", { boardPassword: boardPassword, token: token });
   };
+  
 
   return (
     <div className={`popup ${popup ? "active" : ""}`}>
