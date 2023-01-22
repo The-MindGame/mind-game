@@ -46,16 +46,13 @@ export default function GamePage() {
   const getUserCards = async function () {
     const response = await axios.get(`https://mindgamebackend-production.up.railway.app/board/${currentUserId}/getCards`);
     setUserCards(response?.data);
-    console.log(response);
   };
 
 
 
   useEffect(() => {
     socket.on('cardPlayed', (card)=>{
-      console.log("card played");
-      console.log(card);
-      console.log(boardCards);
+      console.log("Cardplayed", card);
       setRound(card.curLevel);
       setCurrentNumOfLives(card.curNumberOfLives);
       if(!boardCards.includes(card.cardId)){
@@ -67,20 +64,17 @@ export default function GamePage() {
   useEffect(()=>{
     
     socket.on('New Round', () => {
-      console.log("NEW ROUND FROM SERVER");
       getUserCards();
       setBoardCards([]);
     })
 
     socket.on('Game Over', (message) => {
-      console.log(message);
       setEndGame(true);
       setWin(false)
       setMessageEndGame(message);
     })
 
     socket.on('Victory', (message) => {
-      console.log(message);
       setEndGame(true);
       setWin(true)
       setMessageEndGame(message);
@@ -97,7 +91,6 @@ export default function GamePage() {
   // }
 
   const playCard = (cardId) => {
-    console.log(boardId,cardId);
     socket.emit('playCard', {cardId, boardId});
   }
 

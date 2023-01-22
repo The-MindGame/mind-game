@@ -73,7 +73,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 75rem;
+    width: 83rem;
     height: 48rem;
     border-radius: 1rem;
     box-shadow: 1px 2px 43px 1px rgba(0,0,0,1) inset;
@@ -83,11 +83,12 @@
   }
 
   .board {
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
     align-items: flex-start;
     justify-content: center;
     background-color: #d9d9d9;
-    width: 70rem;
+    width: 78rem;
     height: 43rem;
     border-radius: 1rem;
     box-shadow: 1px 2px 43px 1px rgba(0,0,0,1) inset;
@@ -181,9 +182,8 @@
   padding: 2rem 2rem;
   background-color: white;
   border-radius:10px;
-  box-shadow: 2px 6px 16px 0px rgba(79,79,79,0.82);
-  -webkit-box-shadow: 2px 6px 16px 0px rgba(79,79,79,0.82);
-  -moz-box-shadow: 2px 6px 16px 0px rgba(79,79,79,0.82);
+  box-shadow: 2px 6px 16px 0px rgba(0, 0, 0, 0.82);
+  -webkit-box-shadow: 2px 6px 16px 0px rgba(0, 0, 0, 0.82);
 }
 
 .endgame-content{

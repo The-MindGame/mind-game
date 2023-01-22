@@ -104,7 +104,7 @@ function GameWait() {
 
       <div className="user-list">
         <h1>{currentNum}</h1>
-        <h1>Room id: {isAdmin ? location.state?.boardPassword : location.state.board.boardPassword}</h1>
+        <h1>Room Password: {isAdmin ? location.state?.boardPassword : location.state.board.boardPassword}</h1>
         {users?.map((user, index) => {
           return (
             <h1 key={index} className="username">
