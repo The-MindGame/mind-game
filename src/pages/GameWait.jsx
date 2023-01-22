@@ -21,7 +21,7 @@ function GameWait() {
   const [currentUserId, setCurrentUserId] = useState();
   const [currentNum, setCurrentNum] = useState(0);
 
-  console.log(location.state?.board);
+  console.log(location.state);
 
   const getUsers = async function () {
     const response = await axios.get(`https://mindgamebackend-production.up.railway.app/board/${boardId}/getUsers`);
@@ -39,14 +39,16 @@ function GameWait() {
 
 
   useEffect(()=>{
-    getUsers();
+    if(location.state){
+      getUsers();
+    }
 
     socket.on('GAME STARTED!', () => {
       navigate("/game", {
         state: {isAdmin: isAdmin, numOfPlayers: location.state?.numberOfPlayers, userId: currentUserId, boardId: boardId},
       });
     })
-  },[])
+  },[location.state])
 
   const auth_string = Cookies.get("user");
   const token = auth_string ? JSON.parse(auth_string).token : "";

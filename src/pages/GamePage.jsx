@@ -13,12 +13,12 @@ import PartyEmoji from "../assets/icons/PartyEmoji"
 import SadEmoji from "../assets/icons/SadEmoji"
 import Heart from "../assets/icons/Heart"
 
-const auth_string = Cookies.get("user");
-const email = auth_string ? JSON.parse(auth_string).email : "";
 
 
 export default function GamePage() {
-
+  
+  const auth_string = Cookies.get("user");
+  const email = auth_string ? JSON.parse(auth_string).email : "";
   const { socket } = useContext(socketContext);
   
   const location = useLocation();
@@ -28,11 +28,12 @@ export default function GamePage() {
   const currentUserId = location.state?.userId;
   const boardId = location.state?.boardId;
   const users = location.state?.users;
+  console.log(users);
+
   const currentUser = users?.find((user) => {
     return user.email === email;
-  });
+  });  
 
-  console.log(currentUser);
 
   const [userCards, setUserCards] = useState([]);
   const [boardCards, setBoardCards] = useState([]);
@@ -44,6 +45,7 @@ export default function GamePage() {
   
 
   const getUserCards = async function () {
+    console.log(currentUserId);
     const response = await axios.get(`https://mindgamebackend-production.up.railway.app/board/${currentUserId}/getCards`);
     setUserCards(response?.data);
   };
