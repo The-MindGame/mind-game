@@ -14,7 +14,7 @@ function HomePage() {
           <NavLink to={'/login'} id="loginButton" className="button">
             Login
           </NavLink>
-          <NavLink  to={'/signup'} id="signupButton" className="button">
+          <NavLink  to={'/sign-up'} id="signupButton" className="button">
             Sign up
           </NavLink>
         </div>

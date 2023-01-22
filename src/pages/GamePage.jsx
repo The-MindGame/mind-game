@@ -11,6 +11,7 @@ import sadPepe from "../assets/images/crying-pepe.gif"
 import { Link } from "react-router-dom";
 import PartyEmoji from "../assets/icons/PartyEmoji"
 import SadEmoji from "../assets/icons/SadEmoji"
+import Heart from "../assets/icons/Heart"
 
 const auth_string = Cookies.get("user");
 const email = auth_string ? JSON.parse(auth_string).email : "";
@@ -39,6 +40,7 @@ export default function GamePage() {
   const [messageEndGame, setMessageEndGame] = useState("");
   const [win, setWin] = useState(false);
   const [round, setRound] = useState(1);
+  const [currentNumOfLives, setCurrentNumOfLives] = useState(4);
   
 
   const getUserCards = async function () {
@@ -54,9 +56,10 @@ export default function GamePage() {
       console.log("card played");
       console.log(card);
       console.log(boardCards);
-      if(!boardCards.includes(card)){
-
-        setBoardCards(current => [...current, card]);
+      setRound(card.curLevel);
+      setCurrentNumOfLives(card.curNumberOfLives);
+      if(!boardCards.includes(card.cardId)){
+        setBoardCards(current => [...current, card.cardId]);
       }
     })
   }, [])
@@ -99,7 +102,6 @@ export default function GamePage() {
   }
 
 
-
   return (
     <div className="game-page">
       
@@ -117,9 +119,10 @@ export default function GamePage() {
       </div> 
       : <div className="page-wrapper">
         <h1>Round : {round}</h1>
+        <h1>{currentNumOfLives}<Heart className="heart"/></h1>
         {
           users.filter(user => user.id != currentUserId).map((user, index) => {
-              return <div className={"user-" + index}>{user.name}</div>
+              return <div key={index} className={"user-" + index}>{user.name}</div>
           })
         }
         <div className="board-wrapper">

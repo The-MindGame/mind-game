@@ -5,10 +5,20 @@
 
   .page-wrapper{
     background-color: transparent;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 
     h1{
-      @include formText(2rem, 600, white);
+      @include formText(3rem, 600, white);
       padding:0.8rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      svg{
+        margin-left:2rem;
+      }
     }
   }
 
