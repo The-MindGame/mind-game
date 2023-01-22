@@ -51,7 +51,6 @@ export default function GamePage() {
   };
 
 
-
   useEffect(() => {
     socket.on('cardPlayed', (card)=>{
       console.log("Cardplayed", card);
@@ -116,14 +115,14 @@ export default function GamePage() {
         <h1>Round : {round}</h1>
         <h1>{currentNumOfLives}<Heart className="heart"/></h1>
         {
-          users.filter(user => user.id != currentUserId).map((user, index) => {
+          users?.filter(user => user.id != currentUserId).map((user, index) => {
               return <div key={index} className={"user-" + index}>{user.name}</div>
           })
         }
         <div className="board-wrapper">
           <div className="board-border">
             <div className="board">
-              {boardCards.map((card) => {
+              {boardCards?.map((card) => {
                 return <Card key={card} cardNumber={card} className="board-card"/>
               })}
             </div>
@@ -133,7 +132,7 @@ export default function GamePage() {
       <div className="user">
 
         <div className="user-cards">
-          {userCards.map((card) => {
+          {userCards?.map((card) => {
             return <button key={card.id} onClick={() => playCard(card.id)}><Card key={card.id} cardNumber={card.id} /></button>;
           })}
         </div>

@@ -21,7 +21,7 @@ const FAQ = () => {
           height="59.038"
           rx="3.5"
           stroke="white"
-          stroke-opacity="0.2"
+          strokeOpacity="0.2"
         />
       </svg>
     </>

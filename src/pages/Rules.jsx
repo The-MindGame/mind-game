@@ -100,6 +100,7 @@ const Rules = () => {
         <div className="rulesSidebarItems">
           {rulesData.map((item, index) => (
             <div
+              key={index}
               className={
                 isSelected === index
                   ? "rulesSidebarItem selected"

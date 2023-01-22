@@ -21,7 +21,7 @@ function GameWait() {
   const [currentUserId, setCurrentUserId] = useState();
   const [currentNum, setCurrentNum] = useState(0);
 
-  console.log(location.state);
+
 
   const getUsers = async function () {
     const response = await axios.get(`https://mindgamebackend-production.up.railway.app/board/${boardId}/getUsers`);
@@ -59,15 +59,12 @@ function GameWait() {
     }
 
     socket.on('someoneJoinedRoom', (roomData) => {
-      console.log(roomData, " roomdata");
+
       getUsers();
     });
 
 
     socket.on('GAME STARTED!', () => {
-      console.log("started");
-      console.log(boardId);
-      console.log(currentUserId);
       navigate("/game", {
         state: {isAdmin: isAdmin, numOfPlayers: location.state?.numberOfPlayers, userId: currentUserId, boardId: boardId, users:users},
       });
@@ -79,7 +76,6 @@ function GameWait() {
   const startGame = (e) => {
     
     e.preventDefault();
-    console.log(boardId, token);
     socket.emit('gameStart', {boardId, token});
   };
 
